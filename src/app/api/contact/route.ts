@@ -20,7 +20,9 @@ export async function POST(request: Request) {
   try {
     const result = await sendContactMessage(parsed.data);
     return NextResponse.json(result, { status: result.ok ? 200 : 500 });
-  } catch {
+  } catch (error) {
+    console.error("Contact API failed", error);
+
     return NextResponse.json(
       { message: "Unable to send your message right now." },
       { status: 500 },

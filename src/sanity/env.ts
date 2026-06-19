@@ -3,9 +3,12 @@ export const apiVersion =
 
 export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production";
 
-export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "demo";
-
-export const hasSanityConfig = Boolean(
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID &&
-    process.env.NEXT_PUBLIC_SANITY_DATASET,
+const rawProjectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const projectIdPattern = /^[a-z0-9-]+$/;
+const isValidProjectId = Boolean(
+  rawProjectId && projectIdPattern.test(rawProjectId),
 );
+
+export const projectId = isValidProjectId ? rawProjectId! : "demo";
+
+export const hasSanityConfig = Boolean(isValidProjectId && dataset);

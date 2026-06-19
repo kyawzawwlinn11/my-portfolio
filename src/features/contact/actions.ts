@@ -23,11 +23,11 @@ export async function sendContactMessage(
   const to = process.env.CONTACT_EMAIL_TO;
   const from = process.env.CONTACT_EMAIL_FROM ?? "Portfolio <onboarding@resend.dev>";
 
-  if (!apiKey || !to) {
+  if (!apiKey || !to || !from) {
     return {
-      ok: true,
+      ok: false,
       message:
-        "Message validated. Configure Resend environment variables to send email.",
+        "Contact email is not configured yet. Please try again later.",
     };
   }
 
@@ -39,7 +39,7 @@ export async function sendContactMessage(
     message: escapeHtml(values.message).replaceAll("\n", "<br />"),
   };
 
-  await resend.emails.send({
+  const { error } = await resend.emails.send({
     from,
     to,
     subject: `Portfolio contact: ${safeValues.subject}`,
@@ -54,6 +54,18 @@ export async function sendContactMessage(
       </div>
     `,
   });
+
+  if (error) {
+    console.error("Resend contact email failed", {
+      name: error.name,
+      message: error.message,
+    });
+
+    return {
+      ok: false,
+      message: "Unable to send your message right now.",
+    };
+  }
 
   return {
     ok: true,
