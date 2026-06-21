@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
-import { Footer } from "@/components/layout/footer";
-import { Header } from "@/components/layout/header";
 import { createMetadata } from "@/lib/metadata";
 
 import "./globals.css";
@@ -27,14 +25,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full">
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
+      <body className="min-h-full" suppressHydrationWarning>
+        {children}
       </body>
     </html>
   );
