@@ -3,8 +3,10 @@ import { BlogSection } from "@/components/sections/blog-section";
 import { ContactSection } from "@/components/sections/contact-section";
 import { ExperienceSection } from "@/components/sections/experience-section";
 import { HeroSection } from "@/components/sections/hero-section";
+import { MarqueeStrip } from "@/components/sections/marquee-strip";
 import { ProjectsSection } from "@/components/sections/projects-section";
 import { SkillsSection } from "@/components/sections/skills-section";
+import { TrustSignalsSection } from "@/components/sections/trust-signals-section";
 import { CmsEmptyState } from "@/components/shared/cms-empty-state";
 import {
   getExperience,
@@ -37,7 +39,9 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroSection profile={profile} settings={settings} />
+      <HeroSection profile={profile} />
+      <MarqueeStrip />
+      <TrustSignalsSection experience={experience} projects={featuredProjects} />
       <ProjectsSection projects={featuredProjects} />
       <AboutSection profile={profile} />
       <ExperienceSection experience={experience} />

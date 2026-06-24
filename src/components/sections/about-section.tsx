@@ -12,13 +12,13 @@ export function AboutSection({ profile }: AboutSectionProps) {
       <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.75fr_1fr]">
         <AnimatedContainer>
           <SectionHeading
-            eyebrow="About"
-            title="Product-minded engineering with full lifecycle ownership."
+            eyebrow="WORKING_STYLE"
+            title="Calm ownership from idea to launch."
             description={profile.summary}
           />
         </AnimatedContainer>
         <AnimatedContainer delay={0.06}>
-          <div className="readable-panel rounded-xl p-6">
+          <div className="readable-panel rounded-lg p-6">
             <p className="text-base leading-8 text-muted-foreground">{profile.longBio}</p>
           </div>
         </AnimatedContainer>

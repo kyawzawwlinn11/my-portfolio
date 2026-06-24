@@ -16,9 +16,7 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
 
@@ -29,6 +27,7 @@ export async function generateMetadata({
   return createMetadata({
     title: post.title,
     description: post.excerpt,
+    path: `/blog/${post.slug}`,
     ...post.seo,
   });
 }
@@ -49,7 +48,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <Badge key={category.slug}>{category.title}</Badge>
           ))}
         </div>
-        <h1 className="mt-5 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        <h1 className="mt-5 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           {post.title}
         </h1>
         <p className="mt-5 text-lg leading-8 text-muted-foreground">{post.excerpt}</p>

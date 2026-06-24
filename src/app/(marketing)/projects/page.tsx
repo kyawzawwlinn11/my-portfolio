@@ -9,6 +9,7 @@ export const metadata: Metadata = createMetadata({
   title: "Projects - Kyaw Zaww Linn",
   description:
     "Case studies across creator workflows, travel search, fintech mobile, and startup software delivery.",
+  path: "/projects",
 });
 
 export default async function ProjectsPage() {
@@ -26,17 +27,24 @@ export default async function ProjectsPage() {
   return (
     <section className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <p className="text-xs font-bold uppercase text-primary">Projects</p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-foreground">
+        <p className="retro-label text-xs font-bold uppercase text-primary">
+          STAGE_01: SELECT_STAGE
+        </p>
+        <h1 className="mt-4 text-4xl font-bold tracking-tight text-foreground">
           Case studies and selected builds.
         </h1>
         <p className="mt-4 max-w-3xl text-base leading-7 text-muted-foreground">
-          Practical product engineering across travel tech, creator operations,
-          fintech mobile, CMS, and startup/client delivery.
+          Practical systems across travel search, creator operations, fintech mobile, CMS
+          workflows, and focused client delivery.
         </p>
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <ProjectCard key={project._id} project={project} featured={project.featured} />
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={project._id}
+              project={project}
+              featured={project.featured}
+              index={index}
+            />
           ))}
         </div>
       </div>

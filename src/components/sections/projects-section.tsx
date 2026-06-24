@@ -17,19 +17,19 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
         <AnimatedContainer>
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
-              eyebrow="Case Studies"
-              title="Flagship work that shows product, backend, and delivery ownership."
-              description="Selected work from travel tech, creator operations, fintech mobile, and startup client delivery."
+              eyebrow="STAGE_01: SELECT_STAGE"
+              title="Load a case file from real product systems."
+              description="Selected travel tech, creator platform, fintech, and client work with concrete ownership and delivery context."
             />
             <Button asChild variant="secondary">
-              <Link href="/projects">All projects</Link>
+              <Link href="/projects">Open archive</Link>
             </Button>
           </div>
         </AnimatedContainer>
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
           {projects.map((project, index) => (
             <AnimatedContainer key={project._id} delay={Math.min(index * 0.05, 0.15)}>
-              <ProjectCard project={project} featured />
+              <ProjectCard project={project} featured index={index} />
             </AnimatedContainer>
           ))}
         </div>

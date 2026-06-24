@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Send } from "lucide-react";
+import { LoaderCircle, Send } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -9,10 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  contactSchema,
-  type ContactFormValues,
-} from "@/features/contact/schema";
+import { contactSchema, type ContactFormValues } from "@/features/contact/schema";
 
 export function ContactForm() {
   const [status, setStatus] = useState<string | null>(null);
@@ -82,7 +79,11 @@ export function ContactForm() {
       </div>
 
       <Button type="submit" size="lg" disabled={isSubmitting}>
-        <Send className="h-4 w-4" />
+        {isSubmitting ? (
+          <LoaderCircle className="h-4 w-4 animate-spin" />
+        ) : (
+          <Send className="h-4 w-4 transition-transform group-hover/button:translate-x-1" />
+        )}
         {isSubmitting ? "Sending..." : "Send message"}
       </Button>
 

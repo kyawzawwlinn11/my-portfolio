@@ -9,14 +9,16 @@ type ProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+function cleanListItem(value: string) {
+  return value.replace(/^\s*(?:[-*]|[0-9]+[.)])\s+/, "");
+}
+
 export async function generateStaticParams() {
   const projects = await getAllProjects();
   return projects.map((project) => ({ slug: project.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: ProjectPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = await getProjectBySlug(slug);
 
@@ -27,6 +29,7 @@ export async function generateMetadata({
   return createMetadata({
     title: `${project.title} - Case Study`,
     description: project.summary,
+    path: `/projects/${project.slug}`,
     ...project.seo,
   });
 }
@@ -69,15 +72,34 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <article className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
-        <p className="text-xs font-bold uppercase text-primary">
-          Case Study / {project.status ?? "Selected Work"}
+        <p className="retro-label text-xs font-bold uppercase text-primary">
+          CASE_STUDY / {project.status ?? "Selected Work"}
         </p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        <h1 className="mt-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           {project.title}
         </h1>
         <p className="mt-5 text-lg leading-8 text-muted-foreground">{project.summary}</p>
 
-        <div className="mt-8 flex flex-wrap gap-2">
+        <div className="mt-8 grid gap-3 rounded-lg border border-border bg-card/70 p-5 sm:grid-cols-3">
+          <div>
+            <p className="retro-label text-xs text-muted-foreground">role:</p>
+            <p className="mt-1 text-sm font-medium text-foreground">{project.role}</p>
+          </div>
+          <div>
+            <p className="retro-label text-xs text-muted-foreground">status:</p>
+            <p className="mt-1 text-sm font-medium text-foreground">
+              {project.status ?? "Selected Work"}
+            </p>
+          </div>
+          <div>
+            <p className="retro-label text-xs text-muted-foreground">year:</p>
+            <p className="mt-1 text-sm font-medium text-foreground">
+              {project.year ?? "Current"}
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-6 flex flex-wrap gap-2">
           {technologies.map((technology) => (
             <Badge key={technology} variant="secondary">
               {technology}
@@ -85,16 +107,22 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           ))}
         </div>
 
-        <div className="readable-panel mt-10 rounded-xl p-6">
+        <div className="readable-panel mt-10 rounded-lg p-6">
           <p className="text-base leading-8 text-muted-foreground">
             {caseStudy.overview}
           </p>
+          {!project.image?.url ? (
+            <p className="mt-5 border-l border-primary/45 pl-4 text-sm leading-6 text-muted-foreground">
+              Screenshots and implementation details are limited due to production/client
+              confidentiality.
+            </p>
+          ) : null}
         </div>
 
         <div className="mt-10 grid gap-6">
           {sections.map(([title, content]) => (
             <section key={title}>
-              <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+              <h2 className="text-2xl font-bold tracking-tight text-foreground">
                 {title}
               </h2>
               <p className="mt-4 leading-8 text-muted-foreground">{content}</p>
@@ -104,12 +132,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {listSections.map(({ title, items }) => (
-            <section key={title} className="readable-panel rounded-xl p-6">
-              <h2 className="text-lg font-semibold text-foreground">{title}</h2>
+            <section key={title} className="readable-panel rounded-lg p-6">
+              <h2 className="retro-label text-sm font-bold uppercase text-foreground">
+                {title}
+              </h2>
               <ul className="mt-4 space-y-3">
                 {items.map((item) => (
-                  <li key={item} className="text-sm leading-6 text-muted-foreground">
-                    <span className="text-primary">-</span> {item}
+                  <li
+                    key={item}
+                    className="flex gap-3 text-sm leading-6 text-muted-foreground"
+                  >
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    <span>{cleanListItem(item)}</span>
                   </li>
                 ))}
               </ul>

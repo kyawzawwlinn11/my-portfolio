@@ -1,81 +1,79 @@
 import Link from "next/link";
-import { ArrowRight, Code2, Terminal } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { AnimatedContainer } from "@/components/shared/animated-container";
-import type { Profile, SiteSettings } from "@/types";
+import { StaggerContainer, StaggerItem } from "@/components/shared/animated-container";
+import { HeroStatusPanel } from "@/components/sections/hero-status-panel";
+import type { Profile } from "@/types";
 
 type HeroSectionProps = {
   profile: Profile;
-  settings: SiteSettings;
 };
 
-export function HeroSection({ profile, settings }: HeroSectionProps) {
-  const heroCtas = profile.heroCtas ?? [];
-  const highlights = profile.highlights ?? [];
+export function HeroSection({ profile }: HeroSectionProps) {
+  const heroCtas = profile.heroCtas?.length
+    ? profile.heroCtas
+    : [
+        { label: "View case studies", href: "/projects", variant: "primary" as const },
+        { label: "Contact me", href: "/contact", variant: "secondary" as const },
+      ];
+  const highlights = (profile.highlights ?? []).slice(0, 2);
+  const statusRows: Array<[string, string]> = [
+    ["role", profile.role.toLowerCase().replaceAll(" ", "_").replaceAll("-", "_")],
+    ["focus", "product_engineering"],
+    ["domains", "travel_tech / fintech / startups"],
+    ["stack", "nextjs / typescript / node / sanity"],
+    ["status", "open_to_selected_roles"],
+  ];
 
   return (
-    <section className="relative overflow-hidden px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
-      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-        <AnimatedContainer>
-          <h1 className="retro-headline max-w-4xl text-4xl leading-none tracking-tight sm:text-6xl lg:text-7xl">
-            {profile.heroHeadline}
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-            {profile.heroIntro}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            {heroCtas.map((cta) => (
-              <Button
-                key={cta.href}
-                asChild
-                size="lg"
-                variant={cta.variant === "secondary" ? "secondary" : "default"}
-              >
-                <Link href={cta.href}>
-                  {cta.label}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-            ))}
-          </div>
-        </AnimatedContainer>
-
-        <AnimatedContainer
-          delay={0.08}
-          className="retro-hero-art retro-window relative rounded-2xl p-5 pt-12"
-        >
-          <div className="retro-wire left-[-2rem] top-16 h-36 w-36 rotate-[-18deg]" />
-          <div className="flex items-center gap-2 border-b border-border pb-4">
-            <Terminal className="h-4 w-4 text-primary" />
-            <p className="text-xs font-bold uppercase text-muted-foreground">Profile Snapshot</p>
-          </div>
-          <div className="space-y-5 pt-5">
-            <div>
-              <p className="text-xs font-bold uppercase text-primary">Current Focus</p>
-              <p className="mt-2 text-sm leading-6 text-foreground">{profile.availability}</p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {highlights.map((highlight) => (
-                <div
-                  key={highlight}
-                  className="rounded-xl border-2 border-border bg-card p-3 shadow-[4px_4px_0_#1f1a24]"
+    <section className="relative overflow-hidden px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+        <StaggerContainer>
+          <StaggerItem>
+            <p className="retro-label text-sm font-bold text-primary">
+              PLAYER_PROFILE / {profile.name.replaceAll(" ", "_").toUpperCase()}
+            </p>
+          </StaggerItem>
+          <StaggerItem y={10}>
+            <h1 className="retro-headline mt-5 max-w-4xl text-4xl leading-tight tracking-tight sm:text-5xl">
+              {profile.role}
+            </h1>
+          </StaggerItem>
+          <StaggerItem>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
+              {profile.heroIntro}
+            </p>
+          </StaggerItem>
+          <StaggerItem>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {heroCtas.map((cta) => (
+                <Button
+                  key={cta.href}
+                  asChild
+                  size="lg"
+                  variant={cta.variant === "secondary" ? "secondary" : "default"}
                 >
-                  <p className="text-sm text-muted-foreground">{highlight}</p>
-                </div>
+                  <Link href={cta.href}>
+                    {cta.variant === "secondary" ? "SELECT" : "START"}: {cta.label}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover/button:translate-x-1" />
+                  </Link>
+                </Button>
               ))}
             </div>
-            <div className="rounded-xl border-2 border-border bg-background-soft p-4 shadow-[5px_5px_0_#1f1a24]">
-              <div className="flex items-center gap-2">
-                <Code2 className="h-4 w-4 text-primary" />
-                <p className="text-xs font-bold uppercase text-foreground">Positioning</p>
-              </div>
-              <p className="mt-2 text-xs leading-5 text-muted-foreground">
-                {settings.description}
-              </p>
+          </StaggerItem>
+          <StaggerItem>
+            <div className="mt-7 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+              <span className="retro-label inline-flex items-center gap-2 rounded-md border-2 border-primary/35 bg-primary/10 px-3 py-1.5 text-xs text-primary">
+                <span className="status-dot" />
+                {profile.availability}
+              </span>
+              <span>save file ready / {profile.location}</span>
             </div>
-          </div>
-        </AnimatedContainer>
+          </StaggerItem>
+        </StaggerContainer>
+
+        <HeroStatusPanel rows={statusRows} highlights={highlights} />
       </div>
     </section>
   );

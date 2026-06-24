@@ -4,8 +4,8 @@ export const siteConfig: SiteConfig = {
   name: "Kyaw Zaww Linn",
   title: "Kyaw Zaww Linn - Senior Full-Stack Developer",
   description:
-    "Product-minded senior full-stack developer building production web, mobile, CMS, and backend systems for travel, fintech, and startup products.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+    "Senior developer building production web, backend, mobile, and CMS-powered systems for travel, fintech, and startup products.",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://kyawzawwlinn.dev",
   author: "Kyaw Zaww Linn",
   email: "kyawzawwlinn.dev@gmail.com",
   location: "Yangon, Myanmar",

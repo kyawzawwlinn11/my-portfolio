@@ -9,6 +9,7 @@ export const metadata: Metadata = createMetadata({
   title: "Blog - Kyaw Zaww Linn",
   description:
     "Technical notes on full-stack engineering, backend architecture, product systems, startup building, and mobile development.",
+  path: "/blog",
 });
 
 export default async function BlogPage() {
@@ -26,17 +27,19 @@ export default async function BlogPage() {
   return (
     <section className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <p className="text-xs font-bold uppercase text-primary">Blog</p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-foreground">
+        <p className="retro-label text-xs font-bold uppercase text-primary">
+          STAGE_04: DEVLOG
+        </p>
+        <h1 className="mt-4 text-4xl font-bold tracking-tight text-foreground">
           Engineering notes and product lessons.
         </h1>
         <p className="mt-4 max-w-3xl text-base leading-7 text-muted-foreground">
-          Writing on full-stack engineering, backend architecture, product systems,
-          startup delivery, mobile development, and technical lessons.
+          Field notes on backend architecture, product systems, mobile releases, and
+          technical lessons from delivery work.
         </p>
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <BlogCard key={post._id} post={post} />
+          {posts.map((post, index) => (
+            <BlogCard key={post._id} post={post} index={index} />
           ))}
         </div>
       </div>

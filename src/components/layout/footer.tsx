@@ -6,12 +6,11 @@ import { SocialLinks } from "@/components/shared/social-links";
 
 export function Footer() {
   return (
-    <footer className="mt-8 border-t-2 border-border bg-section-cream">
-      <div className="site-shell-line h-1 w-full" />
+    <footer className="mt-8 border-t-2 border-border bg-background-elevated">
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-10 sm:px-6 md:grid-cols-[1.25fr_0.75fr_1fr] lg:px-8">
         <div className="max-w-xl">
           <div className="inline-flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-border bg-primary text-sm font-black text-primary-foreground shadow-[3px_3px_0_#1f1a24]">
+            <span className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-primary/55 bg-primary text-sm font-black text-primary-foreground">
               KZ
             </span>
             <div>
@@ -22,8 +21,8 @@ export function Footer() {
             </div>
           </div>
           <p className="mt-5 text-sm font-medium leading-6 text-muted-foreground">
-            Product-minded engineer focused on production web, mobile, CMS,
-            backend systems, and startup software delivery.
+            I build web, mobile, backend, and CMS-powered systems for teams that need
+            reliable product delivery.
           </p>
           <p className="mt-4 text-xs font-medium leading-5 text-muted-foreground">
             Based in {siteConfig.location}. Available for selected senior roles,

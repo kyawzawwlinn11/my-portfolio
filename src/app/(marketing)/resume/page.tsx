@@ -8,6 +8,7 @@ import { getSiteSettings } from "@/sanity/lib/queries";
 export const metadata: Metadata = createMetadata({
   title: "Resume - Kyaw Zaww Linn",
   description: "Download or request the latest resume for Kyaw Zaww Linn.",
+  path: "/resume",
 });
 
 export default async function ResumePage() {
@@ -17,14 +18,17 @@ export default async function ResumePage() {
 
   return (
     <section className="px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto readable-panel max-w-3xl rounded-xl p-8">
-        <p className="text-xs font-bold uppercase text-primary">Resume</p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-foreground">
+      <div className="mx-auto readable-panel max-w-3xl rounded-lg p-8">
+        <p className="retro-label text-xs font-bold uppercase text-primary">
+          SYSTEM_FILE / RESUME.PDF
+        </p>
+        <h1 className="mt-4 text-4xl font-bold tracking-tight text-foreground">
           Resume and CV.
         </h1>
         <p className="mt-4 text-base leading-7 text-muted-foreground">
-          The CMS can manage a downloadable PDF resume. Until the file is uploaded in
-          Sanity, use the contact page to request the latest copy.
+          {resumeUrl
+            ? "Download my latest resume as a PDF, or contact me for role-specific details."
+            : "For the latest resume or role-specific details, send me a short note and I’ll reply with the right context."}
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           {resumeUrl ? (

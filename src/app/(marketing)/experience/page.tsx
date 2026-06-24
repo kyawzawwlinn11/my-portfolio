@@ -9,6 +9,7 @@ export const metadata: Metadata = createMetadata({
   title: "Experience - Kyaw Zaww Linn",
   description:
     "Work experience across Fly Fairly, Xenolink Technology, uab bank, and freelance software projects.",
+  path: "/experience",
 });
 
 export default async function ExperiencePage() {

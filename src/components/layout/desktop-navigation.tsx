@@ -25,7 +25,7 @@ export function DesktopNavigation({ items }: DesktopNavigationProps) {
   return (
     <nav
       aria-label="Main navigation"
-      className="hidden items-center gap-1 rounded-full border-2 border-border bg-card px-2 py-1 shadow-[4px_4px_0_rgba(31,26,36,0.8)] md:flex"
+      className="hidden items-center gap-1 rounded-lg border-2 border-border bg-card px-2 py-1 md:flex"
     >
       {items.map((item) => {
         const active = isActivePath(pathname, item.href);
@@ -35,18 +35,21 @@ export function DesktopNavigation({ items }: DesktopNavigationProps) {
             key={item.href}
             href={item.href}
             className={cn(
-              "premium-transition relative rounded-full px-3 py-2 text-sm font-bold text-muted-foreground hover:text-foreground",
+              "premium-transition relative rounded-md px-3 py-2 text-sm font-bold text-muted-foreground hover:text-foreground",
               active && "text-foreground",
             )}
           >
-              {active ? (
-                <motion.span
-                  layoutId="active-main-navigation"
-                className="absolute inset-0 rounded-full border-2 border-border bg-background-soft"
+            {active ? (
+              <motion.span
+                layoutId="active-main-navigation"
+                className="absolute inset-0 rounded-md border-2 border-primary/45 bg-primary/10"
                 transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
               />
             ) : null}
-            <span className="relative z-10">{item.label}</span>
+            <span className="relative z-10 inline-flex items-center gap-1.5">
+              {active ? <span className="text-accent">&gt;</span> : null}
+              {item.label}
+            </span>
           </Link>
         );
       })}

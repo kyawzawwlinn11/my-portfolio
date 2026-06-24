@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -17,6 +17,7 @@ type MobileNavigationProps = {
 export function MobileNavigation({ items }: MobileNavigationProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const reduceMotion = useReducedMotion();
 
   return (
     <div className="md:hidden">
@@ -32,39 +33,40 @@ export function MobileNavigation({ items }: MobileNavigationProps) {
 
       <AnimatePresence>
         {open ? (
-        <motion.div
-          initial={{ opacity: 0, y: -10, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -8, scale: 0.98 }}
-          transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-          className="glass-surface absolute inset-x-4 top-20 rounded-lg p-3 shadow-2xl"
-        >
-          <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
-            {items.map((item, index) => (
-              <motion.div
-                key={item.href}
-                initial={{ opacity: 0, y: -4 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.18,
-                  delay: index * 0.025,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    "premium-transition block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-primary/10 hover:text-foreground",
-                    pathname === item.href && "bg-primary/10 text-foreground",
-                  )}
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: -10, scale: 0.98 }}
+            animate={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
+            exit={reduceMotion ? undefined : { opacity: 0, y: -8, scale: 0.98 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="mobile-menu-panel absolute inset-x-4 top-20 rounded-lg p-3"
+          >
+            <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
+              {items.map((item, index) => (
+                <motion.div
+                  key={item.href}
+                  initial={reduceMotion ? false : { opacity: 0, y: -4 }}
+                  animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.18,
+                    delay: index * 0.025,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
                 >
-                  {item.label}
-                </Link>
-              </motion.div>
-            ))}
-          </nav>
-        </motion.div>
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      "premium-transition block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-primary/10 hover:text-foreground",
+                      pathname === item.href &&
+                        "border-l-2 border-accent bg-background-soft text-foreground",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
+              ))}
+            </nav>
+          </motion.div>
         ) : null}
       </AnimatePresence>
     </div>

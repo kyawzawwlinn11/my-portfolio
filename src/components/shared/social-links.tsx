@@ -14,7 +14,7 @@ export function SocialLinks({ links, email }: SocialLinksProps) {
       {email ? (
         <Link
           href={`mailto:${email}`}
-          className="premium-transition inline-flex items-center gap-2 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-foreground shadow-[3px_3px_0_#1f1a24] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-section-mint"
+          className="premium-transition retro-label inline-flex items-center gap-2 rounded-md border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-foreground hover:-translate-y-0.5 hover:border-primary/60 hover:bg-background-soft"
         >
           <Mail className="h-4 w-4" />
           Email
@@ -27,7 +27,7 @@ export function SocialLinks({ links, email }: SocialLinksProps) {
             href={link.href}
             target="_blank"
             rel="noreferrer"
-            className="premium-transition inline-flex items-center gap-2 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-foreground shadow-[3px_3px_0_#1f1a24] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-section-lavender"
+            className="premium-transition retro-label inline-flex items-center gap-2 rounded-md border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-foreground hover:-translate-y-0.5 hover:border-primary/60 hover:bg-background-soft"
           >
             <ExternalLink className="h-4 w-4" />
             {link.label}

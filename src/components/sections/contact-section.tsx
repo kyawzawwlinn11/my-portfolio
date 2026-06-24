@@ -8,13 +8,13 @@ export function ContactSection() {
       <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.85fr_1fr]">
         <AnimatedContainer>
           <SectionHeading
-            eyebrow="Contact"
-            title="Let’s talk about the product you want to ship."
-            description="Best fit: senior full-stack/backend roles, product engineering teams, startup builds, CMS products, mobile systems, and technical leadership support."
+            eyebrow="STAGE_05: CONTACT_TERMINAL"
+            title="Let’s talk about the role, product, or system you want to build."
+            description="Send the role, product idea, or system you’re working on. I’ll reply with context on fit, availability, and next steps."
           />
         </AnimatedContainer>
         <AnimatedContainer delay={0.06}>
-          <div className="readable-panel rounded-xl p-6">
+          <div className="readable-panel rounded-lg p-6">
             <ContactForm />
           </div>
         </AnimatedContainer>

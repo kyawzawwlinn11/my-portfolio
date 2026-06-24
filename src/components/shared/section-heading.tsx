@@ -9,8 +9,10 @@ type SectionHeadingProps = {
 export function SectionHeading({ eyebrow, title, description }: SectionHeadingProps) {
   return (
     <div className="max-w-3xl">
-      <Badge variant="secondary">{eyebrow}</Badge>
-      <h2 className="mt-4 text-3xl font-black uppercase tracking-tight text-foreground sm:text-4xl">
+      <Badge variant="secondary" className="terminal-cursor uppercase">
+        {eyebrow}
+      </Badge>
+      <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
         {title}
       </h2>
       {description ? (

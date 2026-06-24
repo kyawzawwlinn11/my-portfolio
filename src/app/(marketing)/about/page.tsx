@@ -9,7 +9,8 @@ import { getProfile, getSkills } from "@/sanity/lib/queries";
 export const metadata: Metadata = createMetadata({
   title: "About - Kyaw Zaww Linn",
   description:
-    "About Kyaw Zaww Linn, a product-minded senior full-stack developer in Yangon, Myanmar.",
+    "About Kyaw Zaww Linn, a senior developer in Yangon, Myanmar focused on practical product systems.",
+  path: "/about",
 });
 
 export default async function AboutPage() {

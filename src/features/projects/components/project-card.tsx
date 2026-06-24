@@ -9,10 +9,27 @@ import type { Project } from "@/types";
 type ProjectCardProps = {
   project: Project;
   featured?: boolean;
+  index?: number;
 };
 
-export function ProjectCard({ project, featured = false }: ProjectCardProps) {
+function formatProjectNumber(order?: number, index?: number) {
+  return String(order && order > 0 ? order : (index ?? 0) + 1).padStart(2, "0");
+}
+
+function stripListMarker(value: string) {
+  return value.replace(/^\s*(?:[-*]|[0-9]+[.)])\s+/, "");
+}
+
+function getProjectFileLabel(project: Project) {
+  return project.categories?.[0]?.toLowerCase().replaceAll(" ", "_") ?? "case_file";
+}
+
+export function ProjectCard({ project, featured = false, index }: ProjectCardProps) {
   const technologies = project.technologies ?? [];
+  const status = project.status ?? (featured ? "Case Study" : "Selected Work");
+  const impact = project.caseStudy?.impact?.[0]
+    ? stripListMarker(project.caseStudy.impact[0])
+    : project.summary;
   const shadowClass =
     project.order === 1
       ? "retro-card-shadow-teal"
@@ -24,39 +41,84 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
     <Card
       className={
         featured
-          ? `retro-window group overflow-hidden rounded-xl bg-card pt-8 ${shadowClass}`
-          : `group overflow-hidden rounded-xl bg-card ${shadowClass}`
+          ? `retro-card retro-window group overflow-hidden rounded-lg pt-8 ${shadowClass}`
+          : `retro-card group overflow-hidden rounded-lg ${shadowClass}`
       }
     >
-      <CardContent className="p-6">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className="text-xs font-bold uppercase text-primary">
-              {project.status ?? "case-study"} / {project.year ?? "current"}
-            </p>
-            <h3 className="mt-3 text-xl font-black tracking-tight text-foreground">
-              {project.title}
-            </h3>
+      <CardContent className="p-0">
+        <div className="border-b border-border px-5 py-3">
+          <div className="flex items-center justify-between gap-3">
+            <span className="retro-label text-xs text-muted-foreground">
+              SAVE SLOT {formatProjectNumber(project.order, index)} /{" "}
+              {getProjectFileLabel(project)}
+            </span>
+            <Badge variant="default">{status}</Badge>
           </div>
-          <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-primary" />
         </div>
 
-        <p className="mt-4 text-sm leading-6 text-muted-foreground">{project.summary}</p>
+        <div className="p-5">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="retro-label text-sm font-bold text-accent">
+                CASE_FILE_{formatProjectNumber(project.order, index)}
+              </p>
+              <h3 className="mt-3 text-xl font-bold tracking-tight text-foreground">
+                {project.title}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                {project.summary}
+              </p>
+            </div>
+            <ArrowUpRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-primary" />
+          </div>
 
-        <div className="mt-5 flex flex-wrap gap-2">
-          {technologies.slice(0, 5).map((technology) => (
-            <Badge key={technology} variant="secondary">
-              {technology}
-            </Badge>
-          ))}
+          <div className="mt-5 rounded-md border border-border bg-background/60 p-4">
+            <div className="grid gap-2">
+              <div className="metadata-row grid gap-1 sm:grid-cols-[5rem_1fr]">
+                <span className="retro-label text-xs text-muted-foreground">role:</span>
+                <span className="text-sm text-foreground">{project.role}</span>
+              </div>
+              <div className="metadata-row grid gap-1 sm:grid-cols-[5rem_1fr]">
+                <span className="retro-label text-xs text-muted-foreground">domain:</span>
+                <span className="text-sm text-foreground">
+                  {project.categories?.join(" / ") || project.company || "selected work"}
+                </span>
+              </div>
+              <div className="metadata-row grid gap-1 sm:grid-cols-[5rem_1fr]">
+                <span className="retro-label text-xs text-muted-foreground">stack:</span>
+                <span className="text-sm text-foreground">
+                  {technologies.slice(0, 4).join(" / ") || "Documented in case study"}
+                </span>
+              </div>
+              <div className="metadata-row grid gap-1 sm:grid-cols-[5rem_1fr]">
+                <span className="retro-label text-xs text-muted-foreground">year:</span>
+                <span className="text-sm text-foreground">
+                  {project.year ?? "Current"}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <p className="mt-5 border-l border-primary/45 pl-4 text-sm leading-6 text-muted-foreground">
+            <span className="text-foreground">Impact:</span> {impact}
+          </p>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            {technologies.slice(0, 5).map((technology) => (
+              <Badge key={technology} variant="secondary">
+                {technology}
+              </Badge>
+            ))}
+          </div>
+
+          <Link
+            href={getProjectHref(project)}
+            className="group/link retro-label mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary underline-offset-4 hover:underline"
+          >
+            LOAD CASE STUDY
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-1" />
+          </Link>
         </div>
-
-        <Link
-          href={getProjectHref(project)}
-          className="mt-6 inline-flex text-sm font-medium text-primary underline-offset-4 hover:underline"
-        >
-          Read case study
-        </Link>
       </CardContent>
     </Card>
   );

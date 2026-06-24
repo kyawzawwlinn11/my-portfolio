@@ -6,7 +6,8 @@ import { createMetadata } from "@/lib/metadata";
 export const metadata: Metadata = createMetadata({
   title: "Contact - Kyaw Zaww Linn",
   description:
-    "Contact Kyaw Zaww Linn for senior full-stack roles, backend/product engineering opportunities, and freelance startup projects.",
+    "Contact Kyaw Zaww Linn for senior engineering roles, backend/product opportunities, and focused product builds.",
+  path: "/contact",
 });
 
 export default function ContactPage() {

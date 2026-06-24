@@ -17,19 +17,19 @@ export function BlogSection({ posts }: BlogSectionProps) {
         <AnimatedContainer>
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
-              eyebrow="Writing"
-              title="Writing on full-stack engineering, product systems, and startup delivery."
-              description="A CMS-powered blog for technical lessons, architecture notes, and product engineering stories."
+              eyebrow="STAGE_04: DEVLOG"
+              title="Unlocked notes from the workbench."
+              description="Technical lessons, architecture notes, and product decisions written for people who build and hire builders."
             />
             <Button asChild variant="secondary">
-              <Link href="/blog">All posts</Link>
+              <Link href="/blog">Open logs</Link>
             </Button>
           </div>
         </AnimatedContainer>
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {posts.map((post, index) => (
             <AnimatedContainer key={post._id} delay={Math.min(index * 0.05, 0.15)}>
-              <BlogCard post={post} />
+              <BlogCard post={post} index={index} />
             </AnimatedContainer>
           ))}
         </div>
