@@ -25,7 +25,7 @@ export function DesktopNavigation({ items }: DesktopNavigationProps) {
   return (
     <nav
       aria-label="Main navigation"
-      className="hidden items-center gap-1 rounded-lg border-2 border-border bg-card px-2 py-1 md:flex"
+      className="hidden items-center gap-1 rounded-lg border-2 border-border bg-card px-2 py-1 shadow-[4px_4px_0_rgba(32,26,36,0.86)] md:flex"
     >
       {items.map((item) => {
         const active = isActivePath(pathname, item.href);

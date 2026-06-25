@@ -27,9 +27,7 @@ export default async function ProjectsPage() {
   return (
     <section className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <p className="retro-label text-xs font-bold uppercase text-primary">
-          STAGE_01: SELECT_STAGE
-        </p>
+        <p className="retro-label text-xs font-bold text-primary">/selected-work</p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight text-foreground">
           Case studies and selected builds.
         </h1>

@@ -12,7 +12,7 @@ export function AboutSection({ profile }: AboutSectionProps) {
       <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.75fr_1fr]">
         <AnimatedContainer>
           <SectionHeading
-            eyebrow="WORKING_STYLE"
+            eyebrow="/working-style"
             title="Calm ownership from idea to launch."
             description={profile.summary}
           />

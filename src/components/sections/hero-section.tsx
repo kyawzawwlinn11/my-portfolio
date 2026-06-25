@@ -11,69 +11,60 @@ type HeroSectionProps = {
 };
 
 export function HeroSection({ profile }: HeroSectionProps) {
-  const heroCtas = profile.heroCtas?.length
-    ? profile.heroCtas
-    : [
-        { label: "View case studies", href: "/projects", variant: "primary" as const },
-        { label: "Contact me", href: "/contact", variant: "secondary" as const },
-      ];
-  const highlights = (profile.highlights ?? []).slice(0, 2);
+  const heroCtas = profile.heroCtas ?? [];
   const statusRows: Array<[string, string]> = [
-    ["role", profile.role.toLowerCase().replaceAll(" ", "_").replaceAll("-", "_")],
-    ["focus", "product_engineering"],
-    ["domains", "travel_tech / fintech / startups"],
-    ["stack", "nextjs / typescript / node / sanity"],
-    ["status", "open_to_selected_roles"],
+    ["role", profile.role],
+    ["availability", profile.availability],
+    ["location", profile.location],
   ];
 
   return (
-    <section className="relative overflow-hidden px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
-        <StaggerContainer>
-          <StaggerItem>
-            <p className="retro-label text-sm font-bold text-primary">
-              PLAYER_PROFILE / {profile.name.replaceAll(" ", "_").toUpperCase()}
-            </p>
-          </StaggerItem>
-          <StaggerItem y={10}>
-            <h1 className="retro-headline mt-5 max-w-4xl text-4xl leading-tight tracking-tight sm:text-5xl">
-              {profile.role}
-            </h1>
-          </StaggerItem>
-          <StaggerItem>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-              {profile.heroIntro}
-            </p>
-          </StaggerItem>
-          <StaggerItem>
-            <div className="mt-8 flex flex-wrap gap-3">
-              {heroCtas.map((cta) => (
-                <Button
-                  key={cta.href}
-                  asChild
-                  size="lg"
-                  variant={cta.variant === "secondary" ? "secondary" : "default"}
-                >
-                  <Link href={cta.href}>
-                    {cta.variant === "secondary" ? "SELECT" : "START"}: {cta.label}
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover/button:translate-x-1" />
-                  </Link>
-                </Button>
-              ))}
+    <section className="hero-section relative overflow-hidden px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl rounded-xl border-2 border-border bg-section-lavender p-2 shadow-[8px_8px_0_rgba(32,26,36,0.9)]">
+        <div className="grid gap-6 rounded-lg border-2 border-border bg-card p-5 sm:p-7 lg:grid-cols-[1.35fr_0.65fr] lg:items-center lg:gap-8">
+          <StaggerContainer className="min-w-0">
+            <div>
+              <StaggerItem y={10}>
+                <h1 className="retro-hero-statement max-w-3xl">
+                  {profile.heroIntro}
+                </h1>
+              </StaggerItem>
             </div>
-          </StaggerItem>
-          <StaggerItem>
-            <div className="mt-7 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-              <span className="retro-label inline-flex items-center gap-2 rounded-md border-2 border-primary/35 bg-primary/10 px-3 py-1.5 text-xs text-primary">
-                <span className="status-dot" />
-                {profile.availability}
-              </span>
-              <span>save file ready / {profile.location}</span>
-            </div>
-          </StaggerItem>
-        </StaggerContainer>
 
-        <HeroStatusPanel rows={statusRows} highlights={highlights} />
+            <StaggerItem>
+              {heroCtas.length ? (
+                <div className="mt-5 flex flex-wrap gap-3">
+                  {heroCtas.map((cta) => (
+                    <Button
+                      key={cta.href}
+                      asChild
+                      size="default"
+                      variant={cta.variant === "secondary" ? "secondary" : "default"}
+                      className="min-w-44 justify-between"
+                    >
+                      <Link href={cta.href}>
+                        <span className="truncate">{cta.label}</span>
+                        <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover/button:translate-x-1" />
+                      </Link>
+                    </Button>
+                  ))}
+                </div>
+              ) : null}
+            </StaggerItem>
+
+            <StaggerItem>
+              <div className="mt-5">
+                <div className="lg:hidden">
+                  <HeroStatusPanel rows={statusRows} highlights={[]} />
+                </div>
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
+
+          <div className="hidden lg:block">
+            <HeroStatusPanel rows={statusRows} highlights={[]} />
+          </div>
+        </div>
       </div>
     </section>
   );

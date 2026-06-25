@@ -17,12 +17,12 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
         <AnimatedContainer>
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
-              eyebrow="STAGE_01: SELECT_STAGE"
-              title="Load a case file from real product systems."
+              eyebrow="/selected-work"
+              title="Selected product systems and case studies."
               description="Selected travel tech, creator platform, fintech, and client work with concrete ownership and delivery context."
             />
             <Button asChild variant="secondary">
-              <Link href="/projects">Open archive</Link>
+              <Link href="/projects">View all projects</Link>
             </Button>
           </div>
         </AnimatedContainer>

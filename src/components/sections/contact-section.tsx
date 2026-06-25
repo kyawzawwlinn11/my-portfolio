@@ -8,7 +8,7 @@ export function ContactSection() {
       <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.85fr_1fr]">
         <AnimatedContainer>
           <SectionHeading
-            eyebrow="STAGE_05: CONTACT_TERMINAL"
+            eyebrow="/contact"
             title="Let’s talk about the role, product, or system you want to build."
             description="Send the role, product idea, or system you’re working on. I’ll reply with context on fit, availability, and next steps."
           />

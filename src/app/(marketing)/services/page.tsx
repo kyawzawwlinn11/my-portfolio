@@ -44,9 +44,7 @@ export default async function ServicesPage() {
   return (
     <section className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <p className="retro-label text-xs font-bold uppercase text-primary">
-          SERVICE_MENU
-        </p>
+        <p className="retro-label text-xs font-bold text-primary">/services</p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight text-foreground">
           Focused product engineering support.
         </h1>
@@ -56,9 +54,7 @@ export default async function ServicesPage() {
         </p>
         <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_0.75fr]">
           <div className="readable-panel rounded-lg p-6">
-            <h2 className="retro-label text-sm font-bold uppercase text-primary">
-              Best fit
-            </h2>
+            <h2 className="retro-label text-sm font-bold text-primary">best_fit</h2>
             <ul className="mt-5 grid gap-3 sm:grid-cols-2">
               {bestFit.map((item) => (
                 <li key={item} className="flex gap-3 text-sm text-muted-foreground">
@@ -69,9 +65,7 @@ export default async function ServicesPage() {
             </ul>
           </div>
           <div className="readable-panel rounded-lg p-6">
-            <h2 className="retro-label text-sm font-bold uppercase text-accent">
-              Not ideal
-            </h2>
+            <h2 className="retro-label text-sm font-bold text-accent">not_ideal</h2>
             <ul className="mt-5 space-y-3">
               {notIdeal.map((item) => (
                 <li key={item} className="flex gap-3 text-sm text-muted-foreground">
@@ -90,7 +84,7 @@ export default async function ServicesPage() {
               path.
             </p>
             <Button asChild>
-              <Link href="/contact">START CONVERSATION</Link>
+              <Link href="/contact">Start conversation</Link>
             </Button>
           </div>
         </div>

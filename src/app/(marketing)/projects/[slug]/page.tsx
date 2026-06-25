@@ -72,15 +72,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <article className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
-        <p className="retro-label text-xs font-bold uppercase text-primary">
-          CASE_STUDY / {project.status ?? "Selected Work"}
+        <p className="retro-label text-xs font-bold text-primary">
+          case_study / {project.status ?? "Selected Work"}
         </p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           {project.title}
         </h1>
         <p className="mt-5 text-lg leading-8 text-muted-foreground">{project.summary}</p>
 
-        <div className="mt-8 grid gap-3 rounded-lg border border-border bg-card/70 p-5 sm:grid-cols-3">
+        <div className="mt-8 grid gap-3 rounded-lg border-2 border-border bg-card p-5 shadow-[4px_4px_0_rgba(32,26,36,0.86)] sm:grid-cols-3">
           <div>
             <p className="retro-label text-xs text-muted-foreground">role:</p>
             <p className="mt-1 text-sm font-medium text-foreground">{project.role}</p>
@@ -133,9 +133,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {listSections.map(({ title, items }) => (
             <section key={title} className="readable-panel rounded-lg p-6">
-              <h2 className="retro-label text-sm font-bold uppercase text-foreground">
-                {title}
-              </h2>
+              <h2 className="retro-label text-sm font-bold text-foreground">{title}</h2>
               <ul className="mt-4 space-y-3">
                 {items.map((item) => (
                   <li

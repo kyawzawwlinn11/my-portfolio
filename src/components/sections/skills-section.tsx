@@ -44,16 +44,14 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
       <div className="mx-auto max-w-6xl">
         <AnimatedContainer>
           <SectionHeading
-            eyebrow="STAGE_03: STACK_INVENTORY"
-            title="Core loadout first, extended inventory when the product needs it."
+            eyebrow="/stack"
+            title="Core stack first, extended tools when the product needs them."
             description="A prioritized view of the stack I reach for most often, followed by supporting tools grouped for scanning."
           />
         </AnimatedContainer>
         <AnimatedContainer delay={0.04}>
-          <div className="mt-10 rounded-lg border-2 border-primary/35 bg-card p-6">
-            <p className="retro-label text-xs font-bold uppercase text-accent">
-              CORE_LOADOUT
-            </p>
+          <div className="readable-panel mt-10 rounded-lg p-6">
+            <p className="retro-label text-xs font-bold text-accent">core_stack</p>
             <StaggerContainer className="mt-5 flex flex-wrap gap-3" stagger={0.035}>
               {coreSkills.map((skill) => (
                 <StaggerItem key={skill._id} y={6}>
@@ -69,8 +67,8 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
           {Object.entries(groupedSkills).map(([category, categorySkills], index) => (
             <AnimatedContainer key={category} delay={Math.min(index * 0.04, 0.14)}>
               <div className="readable-panel premium-transition rounded-lg p-6 hover:-translate-y-0.5 hover:border-primary/35">
-                <h3 className="retro-label text-sm font-bold uppercase text-foreground">
-                  INVENTORY / {category}
+                <h3 className="retro-label text-sm font-bold text-foreground">
+                  /{category.toLowerCase().replaceAll(" ", "_")}
                 </h3>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {categorySkills.map((skill) => (

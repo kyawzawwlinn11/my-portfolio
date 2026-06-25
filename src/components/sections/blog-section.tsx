@@ -17,12 +17,12 @@ export function BlogSection({ posts }: BlogSectionProps) {
         <AnimatedContainer>
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
-              eyebrow="STAGE_04: DEVLOG"
-              title="Unlocked notes from the workbench."
+              eyebrow="/writing"
+              title="Notes from product engineering work."
               description="Technical lessons, architecture notes, and product decisions written for people who build and hire builders."
             />
             <Button asChild variant="secondary">
-              <Link href="/blog">Open logs</Link>
+              <Link href="/blog">Read writing</Link>
             </Button>
           </div>
         </AnimatedContainer>

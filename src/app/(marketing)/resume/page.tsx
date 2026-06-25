@@ -19,9 +19,7 @@ export default async function ResumePage() {
   return (
     <section className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto readable-panel max-w-3xl rounded-lg p-8">
-        <p className="retro-label text-xs font-bold uppercase text-primary">
-          SYSTEM_FILE / RESUME.PDF
-        </p>
+        <p className="retro-label text-xs font-bold text-primary">resume.pdf</p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight text-foreground">
           Resume and CV.
         </h1>

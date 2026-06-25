@@ -5,14 +5,14 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "premium-transition group/button premium-button retro-label relative inline-flex items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-md border-2 text-sm font-bold uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
+  "premium-transition group/button premium-button relative inline-flex items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-md border-2 text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "border-primary/80 bg-primary text-primary-foreground shadow-[4px_4px_0_rgba(0,0,0,0.45)] hover:-translate-y-0.5 hover:translate-x-0.5 hover:bg-primary/90 hover:shadow-[2px_2px_0_rgba(0,0,0,0.55)]",
+          "border-foreground bg-primary text-primary-foreground shadow-[4px_4px_0_rgba(32,26,36,0.9)] hover:translate-x-0.5 hover:translate-y-0.5 hover:bg-primary/90 hover:shadow-[2px_2px_0_rgba(32,26,36,0.95)]",
         secondary:
-          "border-border bg-card text-foreground shadow-[4px_4px_0_rgba(0,0,0,0.38)] hover:-translate-y-0.5 hover:translate-x-0.5 hover:border-accent/70 hover:bg-background-soft hover:shadow-[2px_2px_0_rgba(0,0,0,0.5)]",
+          "border-foreground bg-card text-foreground shadow-[4px_4px_0_rgba(32,26,36,0.82)] hover:translate-x-0.5 hover:translate-y-0.5 hover:border-primary hover:bg-background-soft hover:shadow-[2px_2px_0_rgba(32,26,36,0.92)]",
         ghost: "border-transparent hover:bg-primary/10 hover:text-foreground",
         link: "text-primary underline-offset-4 hover:underline",
       },

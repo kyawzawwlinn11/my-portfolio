@@ -18,8 +18,8 @@ export function ExperienceSection({ experience }: ExperienceSectionProps) {
       <div className="mx-auto max-w-6xl">
         <AnimatedContainer>
           <SectionHeading
-            eyebrow="STAGE_02: MISSION_LOG"
-            title="Campaign history from production roles."
+            eyebrow="/experience"
+            title="Production experience across product systems."
             description="A recruiter-friendly timeline of roles, ownership, stack, and product domains."
           />
         </AnimatedContainer>
@@ -30,8 +30,8 @@ export function ExperienceSection({ experience }: ExperienceSectionProps) {
                 <div className="absolute left-0 top-0 h-full w-1.5 bg-accent/70" />
                 <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                   <div>
-                    <p className="retro-label text-xs font-bold uppercase text-accent">
-                      MISSION_LOG / {formatDate(item.startDate)} -{" "}
+                    <p className="retro-label text-xs font-bold text-accent">
+                      role_period: {formatDate(item.startDate)} -{" "}
                       {item.isCurrent
                         ? "Present"
                         : item.endDate

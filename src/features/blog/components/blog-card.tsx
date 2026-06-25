@@ -54,7 +54,7 @@ export function BlogCard({ post, index }: BlogCardProps) {
           href={getBlogPostHref(post)}
           className="group/link retro-label mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary underline-offset-4 hover:underline"
         >
-          OPEN LOG
+          Read article
           <ArrowUpRight className="h-4 w-4 transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-1" />
         </Link>
       </CardContent>
